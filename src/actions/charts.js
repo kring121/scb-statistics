@@ -10,7 +10,11 @@ const queryObj = (code, values) => ({
 });
 
 const constructQuery = (sex, years, regions) => {
-  const query = [queryObj('Kon', sex)];
+  const query = [
+    queryObj('Kon', sex),
+    queryObj('Tid', years),
+    queryObj('Region', regions)
+  ];
   return query;
 };
 
@@ -24,8 +28,10 @@ export const getPopulation = (sex, years, regions) => async dispatch => {
       'http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy',
       JSON.stringify(body)
     );
-
-    console.log(res.data);
+    dispatch({
+      type: GET_POPULATION,
+      payload: res.data.data
+    });
   } catch (err) {
     console.log(err);
   }

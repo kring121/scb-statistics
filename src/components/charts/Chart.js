@@ -4,15 +4,22 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getPopulation } from '../../actions/charts';
 
-const Chart = ({ getPopulation }) => {
+const Chart = ({ getPopulation, sex, years, regions }) => {
   useEffect(() => {
-    getPopulation('all');
+    getPopulation(sex, years, regions);
   }, [getPopulation]);
 
   return <h1>Chart</h1>;
 };
 
+const mapStateToProps = state => ({
+  population: state.charts.population,
+  sex: state.charts.selection.sex,
+  years: state.charts.selection.years,
+  regions: state.charts.selection.regions
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { getPopulation }
 )(Chart);
