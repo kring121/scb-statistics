@@ -9,7 +9,7 @@ const PopChart = ({ population, sex, years, regions }) => {
   const height = 400;
   const blue = '#0074D9';
   const pink = '#F012BE';
-  const margin = { top: 20, right: 5, bottom: 20, left: 70 };
+  const margin = { top: 20, right: 20, bottom: 20, left: 70 };
 
   const yearsMin = d3.min(years);
   const yearsMax = d3.max(years);
@@ -35,8 +35,8 @@ const PopChart = ({ population, sex, years, regions }) => {
   lineGenerator.x(d => xScale(d.key[2]));
   lineGenerator.y(d => yScale(parseInt(d.values[0], 10)));
 
-  const menPop = lineGenerator(men);
-  const womenPop = lineGenerator(women);
+  const menPopLine = lineGenerator(men);
+  const womenPopLine = lineGenerator(women);
 
   const xAxis = d3
     .axisBottom()
@@ -50,8 +50,8 @@ const PopChart = ({ population, sex, years, regions }) => {
 
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <path d={menPop} fill='none' stroke={blue} strokeWidth='5' />
-      <path d={womenPop} fill='none' stroke={pink} strokeWidth='5' />
+      <path d={menPopLine} fill='none' stroke={blue} strokeWidth='5' />
+      <path d={womenPopLine} fill='none' stroke={pink} strokeWidth='5' />
       {men.map((d, i) => (
         <circle
           key={`menpoint-${i}`}

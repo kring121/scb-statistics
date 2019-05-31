@@ -12,7 +12,14 @@ const Chart = ({ getPopulation, sex, years, regions }) => {
     getPopulation(sex, years, regions);
   }, [getPopulation]);
 
-  return <PopChart sex={sex} years={years} regions={regions} />;
+  return (
+    <div>
+      <h1 onClick={() => getPopulation(['1'], years, regions)}>Male</h1>
+      <h1 onClick={() => getPopulation(['2'], years, regions)}>Female</h1>
+      <h1 onClick={() => getPopulation('all', years, regions)}>Both</h1>
+      <PopChart sex={sex} years={years} regions={regions} />
+    </div>
+  );
 };
 
 const mapStateToProps = state => ({
