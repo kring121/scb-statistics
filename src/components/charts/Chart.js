@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+// Components
+import PopChart from './PopChart';
+
 // Redux
 import { connect } from 'react-redux';
 import { getPopulation } from '../../actions/charts';
@@ -9,11 +12,10 @@ const Chart = ({ getPopulation, sex, years, regions }) => {
     getPopulation(sex, years, regions);
   }, [getPopulation]);
 
-  return <h1>Chart</h1>;
+  return <PopChart sex={sex} years={years} regions={regions} />;
 };
 
 const mapStateToProps = state => ({
-  population: state.charts.population,
   sex: state.charts.selection.sex,
   years: state.charts.selection.years,
   regions: state.charts.selection.regions

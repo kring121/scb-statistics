@@ -5,7 +5,7 @@ const initialState = {
   selection: {
     sex: 'all',
     years: ['2013', '2014', '2015', '2016', '2017'],
-    regions: 'all'
+    regions: ['00']
   }
 };
 
