@@ -5,9 +5,11 @@ import * as d3 from 'd3';
 import { connect } from 'react-redux';
 
 const PopChart = ({ population, sex, years, regions }) => {
-  const width = 650;
+  const width = 675;
   const height = 400;
-  const margin = { top: 20, right: 5, bottom: 20, left: 35 };
+  const blue = '#0074D9';
+  const pink = '#F012BE';
+  const margin = { top: 20, right: 5, bottom: 20, left: 70 };
 
   const yearsMin = d3.min(years);
   const yearsMax = d3.max(years);
@@ -17,24 +19,13 @@ const PopChart = ({ population, sex, years, regions }) => {
 
   const xScale = d3
     .scaleLinear()
-    .range([10, width - 40])
+    .range([margin.left, width - margin.right])
     .domain([yearsMin, yearsMax]);
 
   const yScale = d3
     .scaleLinear()
-    .range([height - 10, 10])
+    .range([height - margin.bottom, margin.top])
     .domain([popMin, popMax]);
-
-  // const bars = population.map(d => {
-  //   return {
-  //     x: xScale(d.key[2]),
-  //     y: yScale(d.values[0]),
-  //     fill: 'red'
-  //   };
-  // });
-  // {bars.map((d, i) => (
-  //   <rect key={i} x={d.x} y='0' width='40' height={d.y} fill={d.fill} />
-  // ))}
 
   const men = population.filter(d => d.key[1] === '1');
   const women = population.filter(d => d.key[1] === '2');
@@ -47,26 +38,42 @@ const PopChart = ({ population, sex, years, regions }) => {
   const menPop = lineGenerator(men);
   const womenPop = lineGenerator(women);
 
+  const xAxis = d3
+    .axisBottom()
+    .scale(xScale)
+    .ticks(years.length)
+    .tickFormat(d => d);
+  const yAxis = d3.axisLeft().scale(yScale);
+
+  population.length === 0 ? null : d3.select('#xAxisG').call(xAxis),
+    d3.select('#yAxisG').call(yAxis);
+
   return (
-    <svg width={width} height={height}>
-      <path d={menPop} fill='none' stroke='blue' strokeWidth='5' />
-      <path d={womenPop} fill='none' stroke='pink' strokeWidth='5' />
-      {men.map(d => (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <path d={menPop} fill='none' stroke={blue} strokeWidth='5' />
+      <path d={womenPop} fill='none' stroke={pink} strokeWidth='5' />
+      {men.map((d, i) => (
         <circle
+          key={`menpoint-${i}`}
           r='5'
           cx={xScale(d.key[2])}
           cy={yScale(d.values[0])}
-          fill='blue'
+          fill={blue}
         />
       ))}
-      {women.map(d => (
+      {women.map((d, i) => (
         <circle
+          key={`womenpoint-${i}`}
           r='5'
           cx={xScale(d.key[2])}
           cy={yScale(d.values[0])}
-          fill='pink'
+          fill={pink}
         />
       ))}
+      <g>
+        <g id='xAxisG' transform={`translate(0, ${height - margin.bottom})`} />
+        <g id='yAxisG' transform={`translate(${margin.left}, 0)`} />
+      </g>
     </svg>
   );
 };
