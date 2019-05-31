@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://christian-vonlehe:kring121@scb-mxgiz.mongodb.net/test?retryWrites=true&w=majority"
+}
