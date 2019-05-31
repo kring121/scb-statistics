@@ -1,4 +1,4 @@
-import { GET_POPULATION } from '../actions/types';
+import { GET_POPULATION, FILTER_POPULATION } from '../actions/types';
 
 const initialState = {
   population: [],
@@ -6,7 +6,8 @@ const initialState = {
     sex: 'all',
     years: ['2013', '2014', '2015', '2016', '2017'],
     regions: ['00']
-  }
+  },
+  loading: true
 };
 
 export default function(state = initialState, action) {
@@ -16,7 +17,8 @@ export default function(state = initialState, action) {
     case GET_POPULATION:
       return {
         ...state,
-        population: payload
+        population: payload,
+        loading: false
       };
     default:
       return state;
