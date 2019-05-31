@@ -1,0 +1,18 @@
+{
+  "name": "scb-statistics",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "repository": "https://github.com/kring121/scb-statistics.git",
+  "author": "Christian von Lehe <kring.vonlehe@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^3.1.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
