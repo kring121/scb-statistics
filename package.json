@@ -4,12 +4,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "db:seed": "node dropDB && node seed"
   },
   "repository": "https://github.com/kring121/scb-statistics.git",
   "author": "Christian von Lehe <kring.vonlehe@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.0",
     "config": "^3.1.0",
     "express": "^4.17.1",
     "mongoose": "^5.5.12"
