@@ -35,7 +35,7 @@ const config = {
   }
 };
 
-module.exports = async function fetchData() {
+module.exports = async function fetchPopData() {
   try {
     const res = await axios.post(url, query, config);
     // remove the annoying space that is returned in JSON and parse it

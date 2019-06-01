@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
-    "db:seed": "node dropDB && node seed"
+    "db:seed": "node dropDB && node seed",
+    "db:reset": "node dropDB"
   },
   "repository": "https://github.com/kring121/scb-statistics.git",
   "author": "Christian von Lehe <kring.vonlehe@gmail.com>",

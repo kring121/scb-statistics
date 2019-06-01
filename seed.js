@@ -1,19 +1,27 @@
 const connectDB = require('./config/db');
 const Population = require('./models/Population');
+const County = require('./models/County');
 const mongoose = require('mongoose');
-const fetchData = require('./data/population');
+const fetchPopData = require('./data/population');
+const fetchCountyData = require('./data/county');
 
 (async () => {
-  const data = await fetchData();
-  await connectDB();
+  const popData = await fetchPopData();
+  const countyData = await fetchCountyData();
   console.log('Data received');
-  await Population.insertMany(data, function(err) {
+  await connectDB();
+  await Population.insertMany(popData, function(err) {
     if (err) {
       console.log(err);
       mongoose.disconnect();
-    } else {
-      console.log('Database seeded');
-      mongoose.disconnect();
     }
   });
+  await County.insertMany(countyData, function(err) {
+    if (err) {
+      console.log(err);
+      mongoose.disconnect();
+    }
+    mongoose.disconnect();
+  });
+  console.log('Database seeded');
 })();
