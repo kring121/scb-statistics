@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 
 // Redux
 import { connect } from 'react-redux';
+import { getPopulation } from '../../actions/charts';
 
-const PopChart = ({ population, sex, years, regions }) => {
+const PopChart = ({ getPopulation, population, county, sex, year }) => {
+  useEffect(() => {
+    getPopulation(county, sex, year);
+  }, [getPopulation]);
+
   const width = 675;
   const height = 400;
   const blue = '#0074D9';
   const pink = '#F012BE';
   const margin = { top: 20, right: 20, bottom: 20, left: 70 };
 
-  const yearsMin = d3.min(years);
-  const yearsMax = d3.max(years);
-  const populationMap = population.map(pop => parseInt(pop.values[0], 10));
+  const yearsMin = d3.min(year);
+  const yearsMax = d3.max(year);
+  const populationMap = population.map(pop => parseInt(pop.value, 10));
   const popMin = d3.min(populationMap);
   const popMax = d3.max(populationMap);
 
@@ -27,13 +32,13 @@ const PopChart = ({ population, sex, years, regions }) => {
     .range([height - margin.bottom, margin.top])
     .domain([popMin, popMax]);
 
-  const men = population.filter(d => d.key[1] === '1');
-  const women = population.filter(d => d.key[1] === '2');
+  const men = population.filter(d => d.sex === '1');
+  const women = population.filter(d => d.sex === '2');
 
   const lineGenerator = d3.line();
 
-  lineGenerator.x(d => xScale(d.key[2]));
-  lineGenerator.y(d => yScale(parseInt(d.values[0], 10)));
+  lineGenerator.x(d => xScale(d.year));
+  lineGenerator.y(d => yScale(parseInt(d.value, 10)));
 
   const menPopLine = lineGenerator(men);
   const womenPopLine = lineGenerator(women);
@@ -41,7 +46,7 @@ const PopChart = ({ population, sex, years, regions }) => {
   const xAxis = d3
     .axisBottom()
     .scale(xScale)
-    .ticks(years.length)
+    .ticks(year.length)
     .tickFormat(d => d);
   const yAxis = d3.axisLeft().scale(yScale);
 
@@ -56,8 +61,8 @@ const PopChart = ({ population, sex, years, regions }) => {
         <circle
           key={`menpoint-${i}`}
           r='5'
-          cx={xScale(d.key[2])}
-          cy={yScale(d.values[0])}
+          cx={xScale(d.year)}
+          cy={yScale(d.value)}
           fill={blue}
         />
       ))}
@@ -65,8 +70,8 @@ const PopChart = ({ population, sex, years, regions }) => {
         <circle
           key={`womenpoint-${i}`}
           r='5'
-          cx={xScale(d.key[2])}
-          cy={yScale(d.values[0])}
+          cx={xScale(d.year)}
+          cy={yScale(d.value)}
           fill={pink}
         />
       ))}
@@ -79,7 +84,13 @@ const PopChart = ({ population, sex, years, regions }) => {
 };
 
 const mapStateToProps = state => ({
-  population: state.charts.population
+  population: state.charts.population,
+  county: state.charts.county,
+  sex: state.charts.sex,
+  year: state.charts.year
 });
 
-export default connect(mapStateToProps)(PopChart);
+export default connect(
+  mapStateToProps,
+  { getPopulation }
+)(PopChart);
