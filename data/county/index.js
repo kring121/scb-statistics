@@ -8,7 +8,7 @@ module.exports = async function fetchCountyData() {
     const countyIdData = res.data.variables[0].values;
     const countyNameData = res.data.variables[0].valueTexts;
     return countyIdData.map((countyId, i) => ({
-      id: countyId,
+      _id: countyId,
       name: countyNameData[i]
     }));
   } catch (err) {

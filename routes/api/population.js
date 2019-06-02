@@ -8,13 +8,13 @@ const County = require('../../models/County');
 // @ access Public
 
 router.post('/', async (req, res) => {
-  const { countyId, sex, year } = req.body;
+  const { county, sex, year } = req.body;
   try {
     const population = await Population.find({
-      countyId: { $in: countyId },
+      county: { $in: county },
       sex: { $in: sex },
       year: { $in: year }
-    });
+    }).populate('county', 'name');
     res.json(population);
   } catch (err) {
     console.error(err.message);

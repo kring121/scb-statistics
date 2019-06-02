@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const CountySchema = new mongoose.Schema({
-  id: {
+  _id: {
     type: String
   },
   name: {

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const PopulationSchema = new mongoose.Schema({
-  countyId: {
+  county: {
     type: String,
     ref: 'county'
   },

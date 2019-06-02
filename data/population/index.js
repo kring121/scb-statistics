@@ -41,7 +41,7 @@ module.exports = async function fetchPopData() {
     // remove the annoying space that is returned in JSON and parse it
     const data = JSON.parse(res.data.slice(1));
     return data.data.map(datum => ({
-      countyId: datum.key[0],
+      county: datum.key[0],
       sex: datum.key[1],
       year: datum.key[2],
       value: datum.values[0]
