@@ -1,8 +1,10 @@
-import { GET_POPULATION, GET_COUNTIES } from '../actions/types';
+import { GET_POPULATION, GET_COUNTIES, GET_BIRTHS } from '../actions/types';
 
 const initialState = {
   population: [],
   countyList: [],
+  births: [],
+  category: 'Births',
   county: ['00'],
   sex: ['1', '2'],
   year: ['2013', '2014', '2015', '2016', '2017']
@@ -24,6 +26,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         countyList: payload
+      };
+    case GET_BIRTHS:
+      return {
+        ...state,
+        births: payload.births,
+        county: payload.county,
+        sex: payload.sex,
+        year: payload.year
       };
     default:
       return state;

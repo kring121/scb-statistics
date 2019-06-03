@@ -5,9 +5,9 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 // Redux
 import { connect } from 'react-redux';
-import { getCounties, getPopulation } from '../../actions/charts';
+import { getCounties, getPopulation, getBirths } from '../../actions/charts';
 
-const Sidebar = ({ getCounties, getPopulation, countyList }) => {
+const Sidebar = ({ getCounties, getPopulation, getBirths, category, countyList }) => {
   useEffect(() => {
     getCounties();
   }, [getCounties]);
@@ -32,7 +32,9 @@ const Sidebar = ({ getCounties, getPopulation, countyList }) => {
     const bothArray = ['1', '2'];
     let validSex = sex;
     sex[0] === '3' ? (validSex = bothArray) : (validSex = sex);
-    getPopulation(county, validSex, year);
+    category === 'Population' ? 
+    getPopulation(county, validSex, year)
+    : getBirths(county, validSex, year);
   };
   return (
     <Fragment>
@@ -78,10 +80,11 @@ const Sidebar = ({ getCounties, getPopulation, countyList }) => {
 };
 
 const mapStateToProps = state => ({
-  countyList: state.charts.countyList
+  countyList: state.charts.countyList,
+  category: state.charts.category
 });
 
 export default connect(
   mapStateToProps,
-  { getCounties, getPopulation }
+  { getCounties, getPopulation, getBirths }
 )(Sidebar);
