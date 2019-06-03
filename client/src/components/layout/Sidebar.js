@@ -14,7 +14,7 @@ const Sidebar = ({ getCounties, getPopulation, countyList }) => {
 
   const [formData, setFormData] = useState({
     county: ['1440'],
-    sex: ['1', '2'],
+    sex: ['3'],
     year: ['2013', '2014', '2015', '2016', '2017']
   });
 
@@ -29,15 +29,18 @@ const Sidebar = ({ getCounties, getPopulation, countyList }) => {
   };
   const onSubmit = e => {
     e.preventDefault();
-    getPopulation(county, sex, year);
+    const bothArray = ['1', '2'];
+    let validSex = sex;
+    sex[0] === '3' ? (validSex = bothArray) : (validSex = sex);
+    getPopulation(county, validSex, year);
   };
   return (
     <Fragment>
       <h1 className='mb-3'>Filter Results</h1>
-      <Form onSubmit={e => onSubmit(e)}>
+      <Form onSubmit={onSubmit}>
         <FormGroup>
           <Label for='county'>County</Label>
-          <Input type='select' name='county' onChange={e => onChange(e)}>
+          <Input type='select' name='county' onChange={onChange}>
             {countyList.map((county, i) => (
               <option key={i} value={county._id}>
                 {county.name}
@@ -48,7 +51,7 @@ const Sidebar = ({ getCounties, getPopulation, countyList }) => {
         <FormGroup>
           <Label for='sex'>Sex</Label>
           <Input type='select' name='sex' onChange={e => onChange(e)}>
-            <option value={['1', '2']}>Both</option>
+            <option value={['3']}>Both</option>
             <option value={['1']}>Men</option>
             <option value={['2']}>Women</option>
           </Input>
