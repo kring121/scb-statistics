@@ -13,6 +13,7 @@ app.get('/', (req, res) => res.send('API running... you better go catch it!'));
 // define routes
 app.use('/api/population', require('./routes/api/population'));
 app.use('/api/county', require('./routes/api/county'));
+app.use('/api/birth', require('./routes/api/birth'));
 
 const PORT = process.env.PORT || 5000;
 

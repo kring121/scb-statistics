@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const Population = require('../../models/Population');
+const Birth = require('../../models/Birth');
 
-// @ route  POST api/population
-// @ desc   Get filtered population from query selection
+// @ route  POST api/birth
+// @ desc   Get filtered births from query selection
 // @ access Public
 
 router.post('/', async (req, res) => {
   const { county, sex, year } = req.body;
   try {
-    const population = await Population.find({
+    const births = await Birth.find({
       county: { $in: county },
       sex: { $in: sex },
       year: { $in: year }
     }).populate('county', 'name');
-    res.json(population);
+    res.json(births);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
