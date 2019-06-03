@@ -48,6 +48,7 @@ const PopChart = ({ getPopulation, population, county, sex, year }) => {
     .scale(xScale)
     .ticks(year.length)
     .tickFormat(d => d);
+  console.log(year)
   const yAxis = d3.axisLeft().scale(yScale);
 
   population.length === 0 ? null : d3.select('#xAxisG').call(xAxis),

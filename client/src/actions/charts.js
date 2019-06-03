@@ -12,7 +12,12 @@ export const getPopulation = (county, sex, year) => async dispatch => {
     const res = await axios.post('/api/population', body, config);
     dispatch({
       type: GET_POPULATION,
-      payload: res.data
+      payload: { 
+        population: res.data,
+        county,
+        sex,
+        year
+      }
     });
   } catch (err) {
     console.log(err);

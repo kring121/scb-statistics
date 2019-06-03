@@ -15,7 +15,10 @@ export default function(state = initialState, action) {
     case GET_POPULATION:
       return {
         ...state,
-        population: payload
+        population: payload.population,
+        county: payload.county,
+        sex: payload.sex,
+        year: payload.year
       };
     case GET_COUNTIES:
       return {
