@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 const MainSection = () => {
   return (
-    <Container fluid>
+    <Container className='mt-4' fluid>
       <Row>
         <Col>
           <Sidebar />
