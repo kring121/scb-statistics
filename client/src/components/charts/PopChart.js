@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 // imported components
 import ByYears from './ByYears';
+import ByCounties from './ByCounties';
 
 // Redux
 import { connect } from 'react-redux';
@@ -12,7 +13,8 @@ const PopChart = ({ getPopulation, population, county, sex, year }) => {
     getPopulation(county, sex, year);
   }, [getPopulation]);
 
-  return <ByYears values={population} valueName='Population' year={year} />;
+  // return <ByYears values={population} valueName='Population' year={year} />;
+  return <ByCounties county={county} />;
 };
 
 const mapStateToProps = state => ({

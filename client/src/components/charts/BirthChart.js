@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 
+// imported components
+import ByYears from './ByYears';
+
 // Redux
 import { connect } from 'react-redux';
 import { getBirths } from '../../actions/charts';
-import ByYears from './ByYears';
 
 const BirthChart = ({ getBirths, births, county, sex, year }) => {
   useEffect(() => {
