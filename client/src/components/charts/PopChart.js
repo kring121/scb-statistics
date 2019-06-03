@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import * as d3 from 'd3';
 
 // Redux
@@ -54,32 +54,40 @@ const PopChart = ({ getPopulation, population, county, sex, year }) => {
     d3.select('#yAxisG').call(yAxis);
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <path d={menPopLine} fill='none' stroke={blue} strokeWidth='5' />
-      <path d={womenPopLine} fill='none' stroke={pink} strokeWidth='5' />
-      {men.map((d, i) => (
-        <circle
-          key={`menpoint-${i}`}
-          r='5'
-          cx={xScale(d.year)}
-          cy={yScale(d.value)}
-          fill={blue}
-        />
-      ))}
-      {women.map((d, i) => (
-        <circle
-          key={`womenpoint-${i}`}
-          r='5'
-          cx={xScale(d.year)}
-          cy={yScale(d.value)}
-          fill={pink}
-        />
-      ))}
-      <g>
-        <g id='xAxisG' transform={`translate(0, ${height - margin.bottom})`} />
-        <g id='yAxisG' transform={`translate(${margin.left}, 0)`} />
-      </g>
-    </svg>
+    <Fragment>
+      <h2 className='text-center'>{`Population in ${
+        population.length !== 0 ? population[0].county.name : ''
+      } ${yearsMin} - ${yearsMax}`}</h2>
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        <path d={menPopLine} fill='none' stroke={blue} strokeWidth='5' />
+        <path d={womenPopLine} fill='none' stroke={pink} strokeWidth='5' />
+        {men.map((d, i) => (
+          <circle
+            key={`menpoint-${i}`}
+            r='5'
+            cx={xScale(d.year)}
+            cy={yScale(d.value)}
+            fill={blue}
+          />
+        ))}
+        {women.map((d, i) => (
+          <circle
+            key={`womenpoint-${i}`}
+            r='5'
+            cx={xScale(d.year)}
+            cy={yScale(d.value)}
+            fill={pink}
+          />
+        ))}
+        <g>
+          <g
+            id='xAxisG'
+            transform={`translate(0, ${height - margin.bottom})`}
+          />
+          <g id='yAxisG' transform={`translate(${margin.left}, 0)`} />
+        </g>
+      </svg>
+    </Fragment>
   );
 };
 

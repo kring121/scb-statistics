@@ -1,5 +1,5 @@
 import React from 'react';
-import Chart from './components/charts/Chart';
+import MainSection from './components/layout/MainSection';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -10,7 +10,7 @@ const App = () => {
     <Provider store={store}>
       <div>
         <h1>Hello World</h1>
-        <Chart />
+        <MainSection />
       </div>
     </Provider>
   );
