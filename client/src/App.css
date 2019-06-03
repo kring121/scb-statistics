@@ -1,3 +1,7 @@
 .navbar {
   padding: 1.1rem 1rem !important;
 }
+
+.nav-link {
+  cursor: pointer;
+}

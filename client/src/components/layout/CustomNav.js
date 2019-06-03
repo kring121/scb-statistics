@@ -1,18 +1,27 @@
 import React from 'react';
 
+// imported components
 import { Navbar, Nav, NavbarBrand, NavItem, NavLink } from 'reactstrap';
-const CustomNav = () => (
+
+// Redux
+import { connect } from 'react-redux';
+import { setCategory } from '../../actions/charts';
+
+const CustomNav = ({ setCategory }) => (
   <Navbar color='dark'>
     <NavbarBrand>SWEDESTATS</NavbarBrand>
     <Nav>
       <NavItem>
-        <NavLink>Population</NavLink>
+        <NavLink onClick={() => setCategory('population')}>Population</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink>Births</NavLink>
+        <NavLink onClick={() => setCategory('births')}>Births</NavLink>
       </NavItem>
     </Nav>
   </Navbar>
 );
 
-export default CustomNav;
+export default connect(
+  null,
+  { setCategory }
+)(CustomNav);

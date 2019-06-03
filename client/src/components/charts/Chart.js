@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 
-// Components
+// imported components
 import PopChart from './PopChart';
 import BirthChart from './BirthChart';
 
-const Chart = () => {
-  return (
-    <div>
-      {/* <PopChart /> */}
-      <BirthChart />
-    </div>
-  );
+// Redux
+import { connect } from 'react-redux';
+
+const Chart = ({ category }) => {
+  return <div>{category === 'population' ? <PopChart /> : <BirthChart />}</div>;
 };
 
-export default Chart;
+const mapStateToProps = state => ({
+  category: state.charts.category
+});
+
+export default connect(mapStateToProps)(Chart);

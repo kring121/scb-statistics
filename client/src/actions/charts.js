@@ -1,4 +1,9 @@
-import { GET_POPULATION, GET_COUNTIES, GET_BIRTHS } from './types';
+import {
+  GET_POPULATION,
+  GET_COUNTIES,
+  GET_BIRTHS,
+  SET_CATEGORY
+} from './types';
 import axios from 'axios';
 
 export const getPopulation = (county, sex, year) => async dispatch => {
@@ -57,4 +62,11 @@ export const getBirths = (county, sex, year) => async dispatch => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const setCategory = category => dispatch => {
+  dispatch({
+    type: SET_CATEGORY,
+    payload: category
+  });
 };

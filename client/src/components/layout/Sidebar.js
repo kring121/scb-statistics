@@ -32,7 +32,7 @@ const Sidebar = ({ getCounties, getPopulation, getBirths, category, countyList }
     const bothArray = ['1', '2'];
     let validSex = sex;
     sex[0] === '3' ? (validSex = bothArray) : (validSex = sex);
-    category === 'Population' ? 
+    category === 'population' ? 
     getPopulation(county, validSex, year)
     : getBirths(county, validSex, year);
   };
