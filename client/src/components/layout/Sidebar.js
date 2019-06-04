@@ -16,9 +16,15 @@ const Sidebar = ({ getCounties, setFilterType, countyList, filterType }) => {
   return (
     <Fragment>
       <h1>Filter By:</h1>
-      <ButtonGroup>
-        <Button onClick={() => setFilterType('years')}>Years</Button>
-        <Button onClick={() => setFilterType('counties')}>Counties</Button>
+      <ButtonGroup className='mb-4'>
+        <Button 
+          onClick={() => setFilterType('years')} 
+          active={filterType === 'years'}>Years
+        </Button>
+        <Button 
+          onClick={() => setFilterType('counties')}
+          active={filterType === 'counties'}>Counties
+        </Button>
       </ButtonGroup>
       <h1 className='mb-3'>Filter Results</h1>
       {

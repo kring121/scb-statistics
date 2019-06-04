@@ -12,7 +12,6 @@ const BirthChart = ({ getBirths, births, county, sex, year, filterType }) => {
   useEffect(() => {
     getBirths(county, sex, year);
   }, [filterType]);
-
   return (
     filterType === 'years' ? 
     <ByYears values={births} valueName='Births' year={year} />

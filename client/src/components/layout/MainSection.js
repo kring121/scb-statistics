@@ -9,7 +9,7 @@ const MainSection = () => {
   return (
     <Container className='mt-4' fluid>
       <Row>
-        <Col>
+        <Col className='mb-5'>
           <Sidebar />
         </Col>
         <Col>
