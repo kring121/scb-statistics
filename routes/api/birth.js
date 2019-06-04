@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
       county: { $in: county },
       sex: { $in: sex },
       year: { $in: year }
-    }).populate('county', 'name');
+    }).populate('county', 'name').sort({year: 1});
     res.json(births);
   } catch (err) {
     console.error(err.message);

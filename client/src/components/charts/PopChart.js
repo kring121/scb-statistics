@@ -12,11 +12,15 @@ const PopChart = ({ getPopulation, population, county, sex, year, filterType }) 
   useEffect(() => {
     getPopulation(county, sex, year);
   }, [filterType]);
-
   return (
     filterType === 'years' ? 
     <ByYears values={population} valueName='Population' year={year} />
-    : <ByCounties values={population} county={county} />
+    : <ByCounties 
+        values={population} 
+        valueName='Population' 
+        sex={sex[0] === '1' ? 'Male' : 'Female'}  
+        year={year}
+      />
   )
 };
 

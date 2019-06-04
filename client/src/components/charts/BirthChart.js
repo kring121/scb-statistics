@@ -16,7 +16,12 @@ const BirthChart = ({ getBirths, births, county, sex, year, filterType }) => {
   return (
     filterType === 'years' ? 
     <ByYears values={births} valueName='Births' year={year} />
-    : <ByCounties values={births} valueName='Births' year={year} />
+    : <ByCounties 
+        values={births} 
+        valueName='Born' 
+        sex={sex[0] === '1' ? 'Males' : 'Females'}  
+        year={year}
+      />
   )
 };
 

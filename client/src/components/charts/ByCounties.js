@@ -1,14 +1,21 @@
 import React, { Fragment } from 'react';
 import * as d3 from 'd3';
 
-const ByCounties = ({ values, valueName, sex, year, county }) => {
+const ByCounties = ({ values, valueName, year, sex }) => {
   const width = 675;
   const height = 400;
   const margin = { top: 20, right: 20, bottom: 20, left: 70 };
+
+  const blue = '#007bff';
+  const green = '#4BBF73';
   
   const valuesMap = values.map(item => parseInt(item.value, 10));
   const valuesMin = d3.min(valuesMap);
   const valuesMax = d3.max(valuesMap);
+
+  const colorScale = d3.scaleLinear()
+    .range([green, blue])
+    .domain([0, values.length]);
 
   const xScale = d3
     .scaleBand()
@@ -33,17 +40,23 @@ const ByCounties = ({ values, valueName, sex, year, county }) => {
   d3.select('#xAxisCounties').call(xAxis);
   d3.select('#yAxisCounties').call(yAxis);
 
-  const bars = values.map(d => { 
+  const bars = values.map((d, i) => { 
     return {
       x: xScale(d.county.name) ,
       y: yScale(d.value) - margin.bottom,
       width: xScale.bandwidth(),
-      height: height - yScale(d.value)
+      height: height - yScale(d.value),
+      fill: colorScale(i)
     };
   });
 
   return (
     <Fragment>
+      <h2 className='text-center'>
+        {`${sex} ${valueName} in ${
+        values.length !== 0 ? year : ''
+      } by County`}
+      </h2>
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
         {bars.map((d, i) => (
           <rect
@@ -52,7 +65,7 @@ const ByCounties = ({ values, valueName, sex, year, county }) => {
             y={d.y}
             width={d.width}
             height={d.height}
-            fill='black'
+            fill={d.fill}
           />
         ))}
         <g>
