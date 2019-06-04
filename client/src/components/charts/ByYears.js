@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import * as d3 from 'd3';
 
-const ByYears = ({ values, valueName, year }) => {
-  const width = 675;
-  const height = 400;
+const ByYears = ({ chartWidth, values, valueName, year }) => {
+  const width = chartWidth;
+  const height = 500;
   const blue = '#0074D9';
   const pink = '#F012BE';
   const margin = { top: 20, right: 20, bottom: 20, left: 70 };
@@ -46,10 +46,15 @@ const ByYears = ({ values, valueName, year }) => {
     d3.select('#yAxisG').call(yAxis);
   return (
     <Fragment>
-      <h2 className='text-center'>{`${valueName} in ${
+      <h2 className='text-center mb-5'>{`${valueName} in ${
         values.length !== 0 ? values[0].county.name : ''
       } ${yearsMin} - ${yearsMax}`}</h2>
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <svg 
+        className='mb-5' 
+        width={width} 
+        height={height} 
+        viewBox={`0 0 ${width} ${height}`}
+      >
         <path d={malePopLine} fill='none' stroke={blue} strokeWidth='5' />
         <path d={femalePopLine} fill='none' stroke={pink} strokeWidth='5' />
         {males.map((d, i) => (

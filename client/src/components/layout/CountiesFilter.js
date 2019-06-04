@@ -9,7 +9,7 @@ import { getPopulation, getBirths } from '../../actions/charts';
 
 const CountiesFilter = ({ getPopulation, getBirths, category, countyList }) => {
   const [formData, setFormData] = useState({
-    county: ['1480', '0180', '1280'],
+    county: ['1480', '0180', '1280', '0380'],
     sex: ['1'],
     year: ['2013']
   });

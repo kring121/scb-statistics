@@ -79,7 +79,7 @@ export const setFilterType = filterType => dispatch => {
     sex = ['1', '2'];
     year = ['2013', '2014', '2015', '2016', '2017'];
   } else {
-    county = ['1480', '0180', '1280'];
+    county = ['1480', '0180', '1280', '0380'];
     sex = ['1'];
     year = ['2013'];
   }

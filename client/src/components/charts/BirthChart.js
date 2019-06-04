@@ -8,14 +8,20 @@ import ByCounties from './ByCounties';
 import { connect } from 'react-redux';
 import { getBirths } from '../../actions/charts';
 
-const BirthChart = ({ getBirths, births, county, sex, year, filterType }) => {
+const BirthChart = ({ getBirths, chartWidth, births, county, sex, year, filterType }) => {
   useEffect(() => {
     getBirths(county, sex, year);
   }, [filterType]);
   return (
     filterType === 'years' ? 
-    <ByYears values={births} valueName='Births' year={year} />
+      <ByYears
+        chartWidth={chartWidth}
+        values={births} 
+        valueName='Births' 
+        year={year} 
+      />
     : <ByCounties 
+        chartWidth={chartWidth} 
         values={births} 
         valueName='Born' 
         sex={sex[0] === '1' ? 'Males' : 'Females'}  

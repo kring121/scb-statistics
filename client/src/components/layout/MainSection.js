@@ -9,10 +9,10 @@ const MainSection = () => {
   return (
     <Container className='mt-4' fluid>
       <Row>
-        <Col className='mb-5'>
+        <Col lg='4' className='mb-5'>
           <Sidebar />
         </Col>
-        <Col>
+        <Col lg='8'>
           <Chart />
         </Col>
       </Row>

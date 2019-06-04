@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import * as d3 from 'd3';
 
-const ByCounties = ({ values, valueName, year, sex }) => {
-  const width = 675;
-  const height = 400;
+const ByCounties = ({ chartWidth, values, valueName, year, sex }) => {
+  const width = chartWidth;
+  const height = 500;
   const margin = { top: 20, right: 20, bottom: 20, left: 70 };
 
   const blue = '#007bff';
@@ -25,7 +25,7 @@ const ByCounties = ({ values, valueName, year, sex }) => {
 
   const yScale = d3
     .scaleLinear()
-    .range([height - margin.top, margin.bottom])
+    .range([height - margin.bottom, margin.top])
     .domain([valuesMin, valuesMax]);
 
   const xAxis = d3
@@ -52,12 +52,17 @@ const ByCounties = ({ values, valueName, year, sex }) => {
 
   return (
     <Fragment>
-      <h2 className='text-center'>
+      <h2 className='text-center mb-5'>
         {`${sex} ${valueName} in ${
         values.length !== 0 ? year : ''
       } by County`}
       </h2>
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <svg 
+        className='mb-5'
+        width={width} 
+        height={height} 
+        viewBox={`0 0 ${width} ${height}`}
+      >
         {bars.map((d, i) => (
           <rect
             key={`bar-${i}`}

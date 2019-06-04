@@ -8,14 +8,28 @@ import ByCounties from './ByCounties';
 import { connect } from 'react-redux';
 import { getPopulation } from '../../actions/charts';
 
-const PopChart = ({ getPopulation, population, county, sex, year, filterType }) => {
+const PopChart = ({ 
+  getPopulation, 
+  chartWidth,
+  population, 
+  county, 
+  sex, 
+  year, 
+  filterType 
+}) => {
   useEffect(() => {
     getPopulation(county, sex, year);
   }, [filterType]);
   return (
     filterType === 'years' ? 
-    <ByYears values={population} valueName='Population' year={year} />
+    <ByYears 
+      chartWidth={chartWidth} 
+      values={population} 
+      valueName='Population' 
+      year={year} 
+    />
     : <ByCounties 
+        chartWidth={chartWidth} 
         values={population} 
         valueName='Population' 
         sex={sex[0] === '1' ? 'Male' : 'Female'}  
