@@ -73,8 +73,23 @@ export const setCategory = category => dispatch => {
 };
 
 export const setFilterType = filterType => dispatch => {
+  let county, sex, year;
+  if(filterType === 'years') {
+    county = ['00'];
+    sex = ['1', '2'];
+    year = ['2013', '2014', '2015', '2016', '2017'];
+  } else {
+    county = ['1480', '0180', '1280'];
+    sex = ['1'];
+    year = ['2013'];
+  }
   dispatch({
     type: SET_FILTERTYPE,
-    payload: filterType
+    payload: {
+      filterType,
+      county,
+      sex,
+      year
+    }
   });
 };

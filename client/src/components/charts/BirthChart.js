@@ -11,14 +11,12 @@ import { getBirths } from '../../actions/charts';
 const BirthChart = ({ getBirths, births, county, sex, year, filterType }) => {
   useEffect(() => {
     getBirths(county, sex, year);
-  }, [getBirths]);
+  }, [filterType]);
 
   return (
-    {
-      filterType === 'years' ? 
-      <ByYears values={births} valueName='Births' year={year} />
-      : <ByCounties values={births} valueName='Births' year={year} />
-    }
+    filterType === 'years' ? 
+    <ByYears values={births} valueName='Births' year={year} />
+    : <ByCounties values={births} valueName='Births' year={year} />
   )
 };
 

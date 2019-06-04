@@ -18,24 +18,27 @@ const ByCounties = ({ values, valueName, sex, year, county }) => {
 
   const yScale = d3
     .scaleLinear()
-    .range([margin.top, height - margin.bottom])
+    .range([height - margin.top, margin.bottom])
     .domain([valuesMin, valuesMax]);
 
   const xAxis = d3
     .axisBottom()
     .scale(xScale)
     .tickFormat(d => d);
-  const yAxis = d3.axisLeft().scale(yScale);
 
-  d3.select('#xAxisG').call(xAxis);
-  d3.select('#yAxisG').call(yAxis);
+  const yAxisScale = d3.scaleLinear().range([height - margin.top, margin.bottom]).domain([valuesMin, valuesMax])
 
-  const bars = values.map(d => {
+  const yAxis = d3.axisLeft().scale(yAxisScale);
+
+  d3.select('#xAxisCounties').call(xAxis);
+  d3.select('#yAxisCounties').call(yAxis);
+
+  const bars = values.map(d => { 
     return {
       x: xScale(d.county.name) ,
-      y: height - margin.bottom - yScale(d.value),
+      y: yScale(d.value) - margin.bottom,
       width: xScale.bandwidth(),
-      height: yScale(d.value)
+      height: height - yScale(d.value)
     };
   });
 
@@ -54,10 +57,10 @@ const ByCounties = ({ values, valueName, sex, year, county }) => {
         ))}
         <g>
           <g
-            id='xAxisG'
+            id='xAxisCounties'
             transform={`translate(0, ${height - margin.bottom})`}
           />
-          <g id='yAxisG' transform={`translate(${margin.left}, 0)`} />
+          <g id='yAxisCounties' transform={`translate(${margin.left}, 0)`} />
         </g>
       </svg>
     </Fragment>

@@ -10,9 +10,9 @@ const initialState = {
   population: [],
   countyList: [],
   births: [],
-  county: ['00', '01'],
-  sex: ['1'],
-  year: ['2013']
+  county: ['00'],
+  sex: ['1', '2'],
+  year: ['2013', '2014', '2015', '2016', '2017'],
   category: 'population',
   filterType: 'years'
 };
@@ -50,7 +50,10 @@ export default function(state = initialState, action) {
     case SET_FILTERTYPE:
       return {
         ...state,
-        filterType: payload
+        county: payload.county,
+        sex: payload.sex,
+        year: payload.year,
+        filterType: payload.filterType
       };
     default:
       return state;

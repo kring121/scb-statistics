@@ -44,7 +44,7 @@ const ByYears = ({ values, valueName, year }) => {
 
   values.length === 0 ? null : d3.select('#xAxisG').call(xAxis),
     d3.select('#yAxisG').call(yAxis);
-
+  males.map(d => console.log(d))
   return (
     <Fragment>
       <h2 className='text-center'>{`${valueName} in ${

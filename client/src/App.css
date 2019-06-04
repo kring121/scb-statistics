@@ -5,3 +5,7 @@
 .nav-link {
   cursor: pointer;
 }
+
+/* #xAxisCounties .tick text {
+  transform: rotate(-20deg);
+} */
