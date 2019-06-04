@@ -2,17 +2,19 @@ import {
   GET_POPULATION,
   GET_COUNTIES,
   GET_BIRTHS,
-  SET_CATEGORY
+  SET_CATEGORY,
+  SET_FILTERTYPE
 } from '../actions/types';
 
 const initialState = {
   population: [],
   countyList: [],
   births: [],
-  category: 'population',
   county: ['00', '01'],
   sex: ['1'],
   year: ['2013']
+  category: 'population',
+  filterType: 'years'
 };
 
 export default function(state = initialState, action) {
@@ -44,6 +46,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         category: payload
+      };
+    case SET_FILTERTYPE:
+      return {
+        ...state,
+        filterType: payload
       };
     default:
       return state;

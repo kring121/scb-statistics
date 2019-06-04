@@ -2,7 +2,8 @@ import {
   GET_POPULATION,
   GET_COUNTIES,
   GET_BIRTHS,
-  SET_CATEGORY
+  SET_CATEGORY,
+  SET_FILTERTYPE
 } from './types';
 import axios from 'axios';
 
@@ -68,5 +69,12 @@ export const setCategory = category => dispatch => {
   dispatch({
     type: SET_CATEGORY,
     payload: category
+  });
+};
+
+export const setFilterType = filterType => dispatch => {
+  dispatch({
+    type: SET_FILTERTYPE,
+    payload: filterType
   });
 };
