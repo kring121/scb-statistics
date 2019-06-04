@@ -14,7 +14,7 @@ const PopChart = ({ getPopulation, population, county, sex, year }) => {
   }, [getPopulation]);
 
   // return <ByYears values={population} valueName='Population' year={year} />;
-  return <ByCounties county={county} />;
+  return <ByCounties values={population} county={county} />;
 };
 
 const mapStateToProps = state => ({

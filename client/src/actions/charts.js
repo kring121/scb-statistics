@@ -2,7 +2,6 @@ import {
   GET_POPULATION,
   GET_COUNTIES,
   GET_BIRTHS,
-  GET_COUNTY_NAMES,
   SET_CATEGORY
 } from './types';
 import axios from 'axios';
@@ -59,24 +58,6 @@ export const getBirths = (county, sex, year) => async dispatch => {
         sex,
         year
       }
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getCountyNames = countyIds => async dispatch => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-  const body = JSON.stringify({ countyIds });
-  try {
-    const res = await axios.post('/api/county', body, config);
-    dispatch({
-      type: GET_COUNTY_NAMES,
-      payload: res.data
     });
   } catch (err) {
     console.log(err);

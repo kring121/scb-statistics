@@ -1,59 +1,67 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import * as d3 from 'd3';
 
-// Redux
-import { connect } from 'react-redux';
-import { getCountyNames } from '../../actions/charts';
+const ByCounties = ({ values, valueName, sex, year, county }) => {
+  const width = 675;
+  const height = 400;
+  const margin = { top: 20, right: 20, bottom: 20, left: 70 };
+  
+  const valuesMap = values.map(item => parseInt(item.value, 10));
+  const valuesMin = d3.min(valuesMap);
+  const valuesMax = d3.max(valuesMap);
 
-const ByCounties = ({ getCountyNames, values, valueName, year, county }) => {
-  useEffect(() => {
-    getCountyNames(county);
-  }, [getCountyNames]);
-  // const width = 675;
-  // const height = 400;
-  // const margin = { top: 20, right: 20, bottom: 20, left: 70 };
+  const xScale = d3
+    .scaleBand()
+    .padding(0.2)
+    .range([margin.left, width - margin.right])
+    .domain(values.map(d => d.county.name));
 
-  // const valuesMap = values.map(item => parseInt(item.value, 10));
-  // const valuesMin = d3.min(valuesMap);
-  // const valuesMax = d3.max(valuesMap);
+  const yScale = d3
+    .scaleLinear()
+    .range([margin.top, height - margin.bottom])
+    .domain([valuesMin, valuesMax]);
 
-  // const xScale = d3.
+  const xAxis = d3
+    .axisBottom()
+    .scale(xScale)
+    .tickFormat(d => d);
+  const yAxis = d3.axisLeft().scale(yScale);
 
-  // const xScale = d3
-  //   .scaleLinear()
-  //   .range([margin.left, width - margin.right])
-  //   .domain([yearsMin, yearsMax]);
+  d3.select('#xAxisG').call(xAxis);
+  d3.select('#yAxisG').call(yAxis);
 
-  // const yScale = d3
-  //   .scaleLinear()
-  //   .range([height - margin.bottom, margin.top])
-  //   .domain([valuesMin, valuesMax]);
+  const bars = values.map(d => {
+    return {
+      x: xScale(d.county.name) ,
+      y: height - margin.bottom - yScale(d.value),
+      width: xScale.bandwidth(),
+      height: yScale(d.value)
+    };
+  });
 
-  // const males = values.filter(d => d.sex === '1');
-  // const females = values.filter(d => d.sex === '2');
-
-  // const lineGenerator = d3.line();
-
-  // lineGenerator.x(d => xScale(d.year));
-  // lineGenerator.y(d => yScale(parseInt(d.value, 10)));
-
-  // const malePopLine = lineGenerator(males);
-  // const femalePopLine = lineGenerator(females);
-
-  // const xAxis = d3
-  //   .axisBottom()
-  //   .scale(xScale)
-  //   .ticks(year.length)
-  //   .tickFormat(d => d);
-  // const yAxis = d3.axisLeft().scale(yScale);
-
-  // values.length === 0 ? null : d3.select('#xAxisG').call(xAxis),
-  //   d3.select('#yAxisG').call(yAxis);
-
-  return <Fragment />;
+  return (
+    <Fragment>
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        {bars.map((d, i) => (
+          <rect
+            key={`bar-${i}`}
+            x={d.x}
+            y={d.y}
+            width={d.width}
+            height={d.height}
+            fill='black'
+          />
+        ))}
+        <g>
+          <g
+            id='xAxisG'
+            transform={`translate(0, ${height - margin.bottom})`}
+          />
+          <g id='yAxisG' transform={`translate(${margin.left}, 0)`} />
+        </g>
+      </svg>
+    </Fragment>
+  );
 };
 
-export default connect(
-  null,
-  { getCountyNames }
-)(ByCounties);
+export default ByCounties;
