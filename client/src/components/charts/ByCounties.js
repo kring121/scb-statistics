@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import * as d3 from 'd3';
+// import { Spring } from 'react-spring';
 
 const ByCounties = ({ chartWidth, values, valueName, year, sex }) => {
   const width = chartWidth;
@@ -51,37 +52,37 @@ const ByCounties = ({ chartWidth, values, valueName, year, sex }) => {
   });
 
   return (
-    <Fragment>
-      <h2 className='text-center mb-5'>
-        {`${sex} ${valueName} in ${
-        values.length !== 0 ? year : ''
-      } by County`}
-      </h2>
-      <svg 
-        className='mb-5'
-        width={width} 
-        height={height} 
-        viewBox={`0 0 ${width} ${height}`}
-      >
-        {bars.map((d, i) => (
-          <rect
-            key={`bar-${i}`}
-            x={d.x}
-            y={d.y}
-            width={d.width}
-            height={d.height}
-            fill={d.fill}
-          />
-        ))}
-        <g>
-          <g
-            id='xAxisCounties'
-            transform={`translate(0, ${height - margin.bottom})`}
-          />
-          <g id='yAxisCounties' transform={`translate(${margin.left}, 0)`} />
-        </g>
-      </svg>
-    </Fragment>
+      <Fragment>
+        <h2 className='text-center mb-5'>
+          {`${sex} ${valueName} in ${
+          values.length !== 0 ? year : ''
+        } by County`}
+        </h2>
+        <svg 
+          className='mb-5'
+          width={width} 
+          height={height} 
+          viewBox={`0 0 ${width} ${height}`}
+        >
+          {bars.map((d, i) => (
+            <rect
+              key={`bar-${i}`}
+              x={d.x}
+              y={d.y}
+              width={d.width}
+              height={d.height}
+              fill={d.fill}
+            />
+          ))}
+          <g>
+            <g
+              id='xAxisCounties'
+              transform={`translate(0, ${height - margin.bottom})`}
+            />
+            <g id='yAxisCounties' transform={`translate(${margin.left}, 0)`} />
+          </g>
+        </svg>
+      </Fragment>
   );
 };
 

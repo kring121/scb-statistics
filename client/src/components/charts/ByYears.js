@@ -45,45 +45,45 @@ const ByYears = ({ chartWidth, values, valueName, year }) => {
   values.length === 0 ? null : d3.select('#xAxisG').call(xAxis),
     d3.select('#yAxisG').call(yAxis);
   return (
-    <Fragment>
-      <h2 className='text-center mb-5'>{`${valueName} in ${
-        values.length !== 0 ? values[0].county.name : ''
-      } ${yearsMin} - ${yearsMax}`}</h2>
-      <svg 
-        className='mb-5' 
-        width={width} 
-        height={height} 
-        viewBox={`0 0 ${width} ${height}`}
-      >
-        <path d={malePopLine} fill='none' stroke={blue} strokeWidth='5' />
-        <path d={femalePopLine} fill='none' stroke={pink} strokeWidth='5' />
-        {males.map((d, i) => (
-          <circle
-            key={`malepoint-${i}`}
-            r='5'
-            cx={xScale(d.year)}
-            cy={yScale(d.value)}
-            fill={blue}
-          />
-        ))}
-        {females.map((d, i) => (
-          <circle
-            key={`femalepoint-${i}`}
-            r='5'
-            cx={xScale(d.year)}
-            cy={yScale(d.value)}
-            fill={pink}
-          />
-        ))}
-        <g>
-          <g
-            id='xAxisG'
-            transform={`translate(0, ${height - margin.bottom})`}
-          />
-          <g id='yAxisG' transform={`translate(${margin.left}, 0)`} />
-        </g>
-      </svg>
-    </Fragment>
+      <Fragment>
+        <h2 className='text-center mb-5'>{`${valueName} in ${
+          values.length !== 0 ? values[0].county.name : ''
+        } ${yearsMin} - ${yearsMax}`}</h2>
+        <svg 
+          className='mb-5' 
+          width={width} 
+          height={height} 
+          viewBox={`0 0 ${width} ${height}`}
+        >
+          <path d={malePopLine} fill='none' stroke={blue} strokeWidth='5' />
+          <path d={femalePopLine} fill='none' stroke={pink} strokeWidth='5' />
+          {males.map((d, i) => (
+            <circle
+              key={`malepoint-${i}`}
+              r='5'
+              cx={xScale(d.year)}
+              cy={yScale(d.value)}
+              fill={blue}
+            />
+          ))}
+          {females.map((d, i) => (
+            <circle
+              key={`femalepoint-${i}`}
+              r='5'
+              cx={xScale(d.year)}
+              cy={yScale(d.value)}
+              fill={pink}
+            />
+          ))}
+          <g>
+            <g
+              id='xAxisG'
+              transform={`translate(0, ${height - margin.bottom})`}
+            />
+            <g id='yAxisG' transform={`translate(${margin.left}, 0)`} />
+          </g>
+        </svg>
+      </Fragment>
   );
 };
 
