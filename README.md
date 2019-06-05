@@ -17,6 +17,7 @@
 - React
 - Redux
 - D3
+- scb.se API
 - Bootstrap/Reactstrap
 - Express 
 - Node.js
