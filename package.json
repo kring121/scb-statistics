@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
+    "start": "concurrently \"yarn server\" \"yarn client\"",
+    "server": "node server",
+    "devServer": "nodemon server",
     "client": "yarn --cwd client start",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "dev": "concurrently \"yarn devServer\" \"yarn client\"",
     "db:seed": "node dropDB && node seed",
     "db:reset": "node dropDB"
   },
